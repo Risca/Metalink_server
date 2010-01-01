@@ -29,6 +29,7 @@ public:
         Pong,
         Nick,
         List,
+        Chat,
         Undefined
     };
 
@@ -37,6 +38,7 @@ public:
 
 signals:
     void receivedNewContactList(QString rawList);
+    void incomingChatCommand(QString command);
     
 private:
     Ui::Dialog *ui;
@@ -52,6 +54,7 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void sendMessage();
     void parseList(QString rawList);
+    void startChat(QString with);
 
 private:
     int readDataIntoBuffer(int maxSize = MaxBufferSize);
@@ -69,6 +72,9 @@ private:
     QTimer pingTimer;
     QTime pongTime;
     int transferTimerId;
+
+private slots:
+    void startChat(QModelIndex index);
 };
 
 #endif // DIALOG_H

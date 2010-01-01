@@ -31,8 +31,9 @@ Dialog::Dialog(QWidget *parent)
     numBytesForCurrentDataType = -1;
     transferTimerId = 0;
     pingTimer.setInterval(PingInterval);
-    QObject::connect(tcpSocket, SIGNAL(disconnected()), &pingTimer, SLOT(stop()));
-    QObject::connect(&pingTimer, SIGNAL(timeout()), this, SLOT(sendPing()));
+    connect(tcpSocket, SIGNAL(disconnected()), &pingTimer, SLOT(stop()));
+    connect(&pingTimer, SIGNAL(timeout()), this, SLOT(sendPing()));
+    connect(ui->listWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(startChat(QModelIndex)));
     ui->portLineEdit->setFocus();
 }
 
@@ -125,8 +126,10 @@ bool Dialog::readProtocolHeader()
         currentDataType = Nick;
     } else if (buffer == "LIST ") {
         currentDataType = List;
-    }
-    else {
+    } else if (buffer == "CHAT ") {
+        qDebug() << "Received a CHAT command";
+        currentDataType = Chat;
+    } else {
         currentDataType = Undefined;
         abort();
         return false;
@@ -202,6 +205,26 @@ void Dialog::parseList(QString rawList)
     }
 }
 
+void Dialog::startChat(QString with)
+{
+    if(!with.isEmpty())
+    {
+        QByteArray message = "INIT " + QByteArray::number(1);
+        message += " " + QByteArray::number(with.size()) + " " + with.toUtf8();
+        QByteArray data = "CHAT " + QByteArray::number(message.size()) + " " + message;
+
+        if (tcpSocket->write(data) == data.size()){
+            qDebug() << "Sent CHAT INIT!";
+        }
+    }
+}
+
+void Dialog::startChat(QModelIndex index)
+{
+    qDebug() << "You double-clicked on: " << index.data();
+    startChat(index.data().toString());
+}
+
 void Dialog::displayError(QAbstractSocket::SocketError socketError)
 {
     switch (socketError) {
@@ -247,6 +270,10 @@ void Dialog::processData()
         break;
     case List:
         emit receivedNewContactList(QString::fromUtf8(buffer));
+        break;
+    case Chat:
+        qDebug() << "Received a CHAT command";
+        emit incomingChatCommand(QString::fromUtf8(buffer));
         break;
     default:
         break;

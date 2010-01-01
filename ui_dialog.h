@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading ui file 'dialog.ui'
+** Form generated from reading UI file 'dialog.ui'
 **
-** Created: Wed Dec 30 07:09:42 2009
-**      by: Qt User Interface Compiler version 4.5.2
+** Created: Thu 31. Dec 17:39:52 2009
+**      by: Qt User Interface Compiler version 4.6.0
 **
-** WARNING! All changes made in this file will be lost when recompiling ui file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
 #ifndef UI_DIALOG_H
@@ -53,7 +53,7 @@ public:
         Dialog->resize(433, 352);
         horizontalLayout_2 = new QHBoxLayout(Dialog);
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setMargin(11);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -153,7 +153,6 @@ public:
         connectButton->setShortcut(QApplication::translate("Dialog", "Ctrl+O", 0, QApplication::UnicodeUTF8));
         quitButton->setText(QApplication::translate("Dialog", "&Quit", 0, QApplication::UnicodeUTF8));
         quitButton->setShortcut(QApplication::translate("Dialog", "Ctrl+Q", 0, QApplication::UnicodeUTF8));
-        Q_UNUSED(Dialog);
     } // retranslateUi
 
 };
