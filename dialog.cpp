@@ -205,6 +205,11 @@ void Dialog::parseList(QString rawList)
     }
 }
 
+void Dialog::parseChatCommand(QString command)
+{
+
+}
+
 void Dialog::startChat(QString with)
 {
     if(!with.isEmpty())

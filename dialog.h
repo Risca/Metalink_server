@@ -46,7 +46,6 @@ private:
 
 private slots:
     void activateSendButton();
-
     void connectToHost();
     void processReadyRead();
     void sendPing();
@@ -54,6 +53,7 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void sendMessage();
     void parseList(QString rawList);
+    void parseChatCommand(QString command);
     void startChat(QString with);
 
 private:
