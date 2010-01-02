@@ -1,306 +1,349 @@
 <!DOCTYPE QtCreatorProject>
 <qtcreator>
  <data>
-  <variable>RunConfiguration0-BaseEnvironmentBase</variable>
-  <value type="int">2</value>
- </data>
- <data>
   <variable>RunConfiguration0-CommandLineArguments</variable>
-  <valuelist type="QVariantList"/>
+  <valuelist type="QVariantList" />
  </data>
  <data>
   <variable>RunConfiguration0-ProFile</variable>
-  <value type="QString">SR_-_Meta_link_RP_Edition.pro</value>
+  <value type="QString" >SR_-_Meta_link_RP_Edition.pro</value>
  </data>
  <data>
   <variable>RunConfiguration0-RunConfiguration.name</variable>
-  <value type="QString">SR_-_Meta_link_RP_Edition</value>
+  <value type="QString" >SR_-_Meta_link_RP_Edition</value>
  </data>
  <data>
   <variable>RunConfiguration0-UseDyldImageSuffix</variable>
-  <value type="bool">false</value>
+  <value type="bool" >false</value>
  </data>
  <data>
   <variable>RunConfiguration0-UseTerminal</variable>
-  <value type="bool">false</value>
+  <value type="bool" >false</value>
  </data>
  <data>
   <variable>RunConfiguration0-UserEnvironmentChanges</variable>
-  <valuelist type="QVariantList"/>
+  <valuelist type="QVariantList" />
  </data>
  <data>
   <variable>RunConfiguration0-UserSetName</variable>
-  <value type="bool">false</value>
- </data>
- <data>
-  <variable>RunConfiguration0-UserSetWorkingDirectory</variable>
-  <value type="bool">false</value>
- </data>
- <data>
-  <variable>RunConfiguration0-UserWorkingDirectory</variable>
-  <value type="QString"></value>
+  <value type="bool" >false</value>
  </data>
  <data>
   <variable>RunConfiguration0-type</variable>
-  <value type="QString">Qt4ProjectManager.Qt4RunConfiguration</value>
+  <value type="QString" >Qt4ProjectManager.Qt4RunConfiguration</value>
  </data>
  <data>
   <variable>activeRunConfiguration</variable>
-  <value type="int">0</value>
+  <value type="int" >0</value>
  </data>
  <data>
   <variable>activebuildconfiguration</variable>
-  <value type="QString">Debug</value>
+  <value type="QString" >Debug</value>
  </data>
  <data>
   <variable>buildConfiguration-Debug</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
-   <value key="QtVersionId" type="int">0</value>
-   <value key="ToolChain" type="int">2</value>
-   <value key="addQDumper" type=""></value>
-   <value key="buildConfiguration" type="int">2</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <value key="QtVersionId" type="int" >0</value>
+   <value key="ToolChain" type="int" >2</value>
+   <value key="addQDumper" type="" ></value>
+   <value key="buildConfiguration" type="int" >2</value>
   </valuemap>
  </data>
  <data>
   <variable>buildConfiguration-Release</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
-   <value key="QtVersionId" type="int">0</value>
-   <value key="ToolChain" type="int">2</value>
-   <value key="addQDumper" type=""></value>
-   <value key="buildConfiguration" type="int">0</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="QtVersionId" type="int" >0</value>
+   <value key="ToolChain" type="int" >2</value>
+   <value key="addQDumper" type="" ></value>
+   <value key="buildConfiguration" type="int" >0</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Debug-buildstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
-   <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">ALLUSERSPROFILE=C:\ProgramData</value>
-    <value type="QString">APPDATA=C:\Users\Risca\AppData\Roaming</value>
-    <value type="QString">COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMW6432=C:\Program Files\Common Files</value>
-    <value type="QString">COMPUTERNAME=RISCA-MAINFRAME</value>
-    <value type="QString">COMSPEC=C:\Windows\system32\cmd.exe</value>
-    <value type="QString">FP_NO_HOST_CHECK=NO</value>
-    <value type="QString">HOMEDRIVE=C:</value>
-    <value type="QString">HOMEPATH=\Users\Risca</value>
-    <value type="QString">LOCALAPPDATA=C:\Users\Risca\AppData\Local</value>
-    <value type="QString">LOGONSERVER=\\RISCA-MAINFRAME</value>
-    <value type="QString">NUMBER_OF_PROCESSORS=4</value>
-    <value type="QString">OS=Windows_NT</value>
-    <value type="QString">PATH=C:\Qt\2009.05\mingw\bin;C:\Qt\2009.05\qt\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Git\cmd</value>
-    <value type="QString">PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
-    <value type="QString">PROCESSOR_ARCHITECTURE=x86</value>
-    <value type="QString">PROCESSOR_ARCHITEW6432=AMD64</value>
-    <value type="QString">PROCESSOR_IDENTIFIER=Intel64 Family 15 Model 3 Stepping 4, GenuineIntel</value>
-    <value type="QString">PROCESSOR_LEVEL=15</value>
-    <value type="QString">PROCESSOR_REVISION=0304</value>
-    <value type="QString">PROGRAMDATA=C:\ProgramData</value>
-    <value type="QString">PROGRAMFILES=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMFILES(X86)=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMW6432=C:\Program Files</value>
-    <value type="QString">PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\</value>
-    <value type="QString">PUBLIC=C:\Users\Public</value>
-    <value type="QString">QTDIR=C:/Qt/2009.05/qt</value>
-    <value type="QString">SESSIONNAME=Console</value>
-    <value type="QString">SYSTEMDRIVE=C:</value>
-    <value type="QString">SYSTEMROOT=C:\Windows</value>
-    <value type="QString">TEMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">TMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">USERDOMAIN=Risca-Mainframe</value>
-    <value type="QString">USERNAME=Risca</value>
-    <value type="QString">USERPROFILE=C:\Users\Risca</value>
-    <value type="QString">WINDIR=C:\Windows</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >ANT_HOME=/usr/share/ant</value>
+    <value type="QString" >CONFIG_PROTECT=/var/lib/hsqldb /usr/share/config</value>
+    <value type="QString" >CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild /etc/splash</value>
+    <value type="QString" >CVS_RSH=ssh</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Jzzbwrconm,guid=351e8840500e71dec3bcf6874b3fba69</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=192.168.1.65:73.0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >EDITOR=/bin/nano</value>
+    <value type="QString" >GCC_SPECS=</value>
+    <value type="QString" >GDK_USE_XFT=1</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-8Cf6Rk/S.gpg-agent:2047:1</value>
+    <value type="QString" >GS_LIB=/home/risca/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/risca/.gtkrc-2.0::/home/risca/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/risca/.gtkrc::/home/risca/.kde4/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/risca</value>
+    <value type="QString" >INFOPATH=/usr/share/info:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/info:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/info</value>
+    <value type="QString" >JAVAC=/etc/java-config-2/current-system-vm/bin/javac</value>
+    <value type="QString" >JAVACC_HOME=/usr/share/javacc/</value>
+    <value type="QString" >JAVA_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >JDK_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=sv_SE.UTF-8</value>
+    <value type="QString" >LC_COLLATE=C</value>
+    <value type="QString" >LC_CTYPE=sv_SE.UTF-8</value>
+    <value type="QString" >LESS=-R -M --shift 5</value>
+    <value type="QString" >LESSOPEN=|lesspipe.sh %s</value>
+    <value type="QString" >LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib32/dri</value>
+    <value type="QString" >LOGNAME=risca</value>
+    <value type="QString" >MANPATH=/etc/java-config-2/current-system-vm/man:/usr/local/share/man:/usr/share/man:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/man:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/man:/etc/java-config/system-vm/man/</value>
+    <value type="QString" >OPENGL_PROFILE=ati</value>
+    <value type="QString" >PAGER=/usr/bin/less</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/i386-unknown-linux-uclibc/gcc-bin/4.4.2:/usr/x86_64-pc-linux-gnu/gcc-bin/4.3.4:/usr/games/bin:$PATH</value>
+    <value type="QString" >PRELINK_PATH_MASK=/usr/lib64/klibc</value>
+    <value type="QString" >PWD=/home/risca</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/risca/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/risca-mainframe:@/tmp/.ICE-unix/2075,unix/risca-mainframe:/tmp/.ICE-unix/2075</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=2050</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-zLUWxB2049/agent.2049</value>
+    <value type="QString" >STRIGI_PLUGIN_PATH=/usr/lib64/strigi:</value>
+    <value type="QString" >USER=risca</value>
+    <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/share/games</value>
+    <value type="QString" >XDG_SESSION_COOKIE=a3527786c09b017e73e4689a4af5ab1b-1262467689.476349-1800892659</value>
+    <value type="QString" >XDM_MANAGED=method=classic</value>
+    <value type="QString" >XSESSION=kde-4</value>
+    <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
-   <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">C:/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition/SR_-_Meta_link_RP_Edition.pro</value>
-    <value type="QString">-spec</value>
-    <value type="QString">win32-g++</value>
-    <value type="QString">-r</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >/media/windows/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition/SR_-_Meta_link_RP_Edition.pro</value>
+    <value type="QString" >-spec</value>
+    <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
+    <value type="QString" >-r</value>
+    <value type="QString" >CONFIG+=debug_and_release</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString">c:/qt/2009.05/qt/bin/qmake.exe</value>
-   <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">C:/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
-   <value key="buildConfiguration" type=""></value>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/media/windows/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
+   <value key="buildConfiguration" type="" ></value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Debug-buildstep1</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
-   <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">ALLUSERSPROFILE=C:\ProgramData</value>
-    <value type="QString">APPDATA=C:\Users\Risca\AppData\Roaming</value>
-    <value type="QString">COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMW6432=C:\Program Files\Common Files</value>
-    <value type="QString">COMPUTERNAME=RISCA-MAINFRAME</value>
-    <value type="QString">COMSPEC=C:\Windows\system32\cmd.exe</value>
-    <value type="QString">FP_NO_HOST_CHECK=NO</value>
-    <value type="QString">HOMEDRIVE=C:</value>
-    <value type="QString">HOMEPATH=\Users\Risca</value>
-    <value type="QString">LOCALAPPDATA=C:\Users\Risca\AppData\Local</value>
-    <value type="QString">LOGONSERVER=\\RISCA-MAINFRAME</value>
-    <value type="QString">NUMBER_OF_PROCESSORS=4</value>
-    <value type="QString">OS=Windows_NT</value>
-    <value type="QString">PATH=C:\Qt\2009.05\mingw\bin;C:\Qt\2009.05\qt\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Git\cmd</value>
-    <value type="QString">PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
-    <value type="QString">PROCESSOR_ARCHITECTURE=x86</value>
-    <value type="QString">PROCESSOR_ARCHITEW6432=AMD64</value>
-    <value type="QString">PROCESSOR_IDENTIFIER=Intel64 Family 15 Model 3 Stepping 4, GenuineIntel</value>
-    <value type="QString">PROCESSOR_LEVEL=15</value>
-    <value type="QString">PROCESSOR_REVISION=0304</value>
-    <value type="QString">PROGRAMDATA=C:\ProgramData</value>
-    <value type="QString">PROGRAMFILES=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMFILES(X86)=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMW6432=C:\Program Files</value>
-    <value type="QString">PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\</value>
-    <value type="QString">PUBLIC=C:\Users\Public</value>
-    <value type="QString">QTDIR=C:/Qt/2009.05/qt</value>
-    <value type="QString">SESSIONNAME=Console</value>
-    <value type="QString">SYSTEMDRIVE=C:</value>
-    <value type="QString">SYSTEMROOT=C:\Windows</value>
-    <value type="QString">TEMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">TMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">USERDOMAIN=Risca-Mainframe</value>
-    <value type="QString">USERNAME=Risca</value>
-    <value type="QString">USERPROFILE=C:\Users\Risca</value>
-    <value type="QString">WINDIR=C:\Windows</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >ANT_HOME=/usr/share/ant</value>
+    <value type="QString" >CONFIG_PROTECT=/var/lib/hsqldb /usr/share/config</value>
+    <value type="QString" >CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild /etc/splash</value>
+    <value type="QString" >CVS_RSH=ssh</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Jzzbwrconm,guid=351e8840500e71dec3bcf6874b3fba69</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=192.168.1.65:73.0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >EDITOR=/bin/nano</value>
+    <value type="QString" >GCC_SPECS=</value>
+    <value type="QString" >GDK_USE_XFT=1</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-8Cf6Rk/S.gpg-agent:2047:1</value>
+    <value type="QString" >GS_LIB=/home/risca/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/risca/.gtkrc-2.0::/home/risca/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/risca/.gtkrc::/home/risca/.kde4/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/risca</value>
+    <value type="QString" >INFOPATH=/usr/share/info:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/info:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/info</value>
+    <value type="QString" >JAVAC=/etc/java-config-2/current-system-vm/bin/javac</value>
+    <value type="QString" >JAVACC_HOME=/usr/share/javacc/</value>
+    <value type="QString" >JAVA_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >JDK_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=sv_SE.UTF-8</value>
+    <value type="QString" >LC_COLLATE=C</value>
+    <value type="QString" >LC_CTYPE=sv_SE.UTF-8</value>
+    <value type="QString" >LESS=-R -M --shift 5</value>
+    <value type="QString" >LESSOPEN=|lesspipe.sh %s</value>
+    <value type="QString" >LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib32/dri</value>
+    <value type="QString" >LOGNAME=risca</value>
+    <value type="QString" >MANPATH=/etc/java-config-2/current-system-vm/man:/usr/local/share/man:/usr/share/man:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/man:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/man:/etc/java-config/system-vm/man/</value>
+    <value type="QString" >OPENGL_PROFILE=ati</value>
+    <value type="QString" >PAGER=/usr/bin/less</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/i386-unknown-linux-uclibc/gcc-bin/4.4.2:/usr/x86_64-pc-linux-gnu/gcc-bin/4.3.4:/usr/games/bin:$PATH</value>
+    <value type="QString" >PRELINK_PATH_MASK=/usr/lib64/klibc</value>
+    <value type="QString" >PWD=/home/risca</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/risca/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/risca-mainframe:@/tmp/.ICE-unix/2075,unix/risca-mainframe:/tmp/.ICE-unix/2075</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=2050</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-zLUWxB2049/agent.2049</value>
+    <value type="QString" >STRIGI_PLUGIN_PATH=/usr/lib64/strigi:</value>
+    <value type="QString" >USER=risca</value>
+    <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/share/games</value>
+    <value type="QString" >XDG_SESSION_COOKIE=a3527786c09b017e73e4689a4af5ab1b-1262467689.476349-1800892659</value>
+    <value type="QString" >XDM_MANAGED=method=classic</value>
+    <value type="QString" >XSESSION=kde-4</value>
+    <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
-   <value key="abstractProcess.IgnoreReturnValue" type="bool">false</value>
-   <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">-w</value>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool" >false</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >-w</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString">C:/Qt/2009.05/mingw/bin/mingw32-make.exe</value>
-   <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">C:/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/media/windows/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Debug-cleanstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Debug</value>
-   <valuelist key="abstractProcess.Environment" type="QVariantList">
-    <value type="QString">ALLUSERSPROFILE=C:\ProgramData</value>
-    <value type="QString">APPDATA=C:\Users\Risca\AppData\Roaming</value>
-    <value type="QString">COMMONPROGRAMFILES=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMFILES(X86)=C:\Program Files (x86)\Common Files</value>
-    <value type="QString">COMMONPROGRAMW6432=C:\Program Files\Common Files</value>
-    <value type="QString">COMPUTERNAME=RISCA-MAINFRAME</value>
-    <value type="QString">COMSPEC=C:\Windows\system32\cmd.exe</value>
-    <value type="QString">FP_NO_HOST_CHECK=NO</value>
-    <value type="QString">HOMEDRIVE=C:</value>
-    <value type="QString">HOMEPATH=\Users\Risca</value>
-    <value type="QString">LOCALAPPDATA=C:\Users\Risca\AppData\Local</value>
-    <value type="QString">LOGONSERVER=\\RISCA-MAINFRAME</value>
-    <value type="QString">NUMBER_OF_PROCESSORS=4</value>
-    <value type="QString">OS=Windows_NT</value>
-    <value type="QString">PATH=C:\Qt\2009.05\mingw\bin;C:\Qt\2009.05\qt\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Git\cmd</value>
-    <value type="QString">PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
-    <value type="QString">PROCESSOR_ARCHITECTURE=x86</value>
-    <value type="QString">PROCESSOR_ARCHITEW6432=AMD64</value>
-    <value type="QString">PROCESSOR_IDENTIFIER=Intel64 Family 15 Model 3 Stepping 4, GenuineIntel</value>
-    <value type="QString">PROCESSOR_LEVEL=15</value>
-    <value type="QString">PROCESSOR_REVISION=0304</value>
-    <value type="QString">PROGRAMDATA=C:\ProgramData</value>
-    <value type="QString">PROGRAMFILES=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMFILES(X86)=C:\Program Files (x86)</value>
-    <value type="QString">PROGRAMW6432=C:\Program Files</value>
-    <value type="QString">PSMODULEPATH=C:\Windows\system32\WindowsPowerShell\v1.0\Modules\</value>
-    <value type="QString">PUBLIC=C:\Users\Public</value>
-    <value type="QString">QTDIR=C:/Qt/2009.05/qt</value>
-    <value type="QString">SESSIONNAME=Console</value>
-    <value type="QString">SYSTEMDRIVE=C:</value>
-    <value type="QString">SYSTEMROOT=C:\Windows</value>
-    <value type="QString">TEMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">TMP=C:\Users\Risca\AppData\Local\Temp</value>
-    <value type="QString">USERDOMAIN=Risca-Mainframe</value>
-    <value type="QString">USERNAME=Risca</value>
-    <value type="QString">USERPROFILE=C:\Users\Risca</value>
-    <value type="QString">WINDIR=C:\Windows</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >ANT_HOME=/usr/share/ant</value>
+    <value type="QString" >CONFIG_PROTECT=/var/lib/hsqldb /usr/share/config</value>
+    <value type="QString" >CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild /etc/splash</value>
+    <value type="QString" >CVS_RSH=ssh</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Jzzbwrconm,guid=351e8840500e71dec3bcf6874b3fba69</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=192.168.1.65:73.0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >EDITOR=/bin/nano</value>
+    <value type="QString" >GCC_SPECS=</value>
+    <value type="QString" >GDK_USE_XFT=1</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-8Cf6Rk/S.gpg-agent:2047:1</value>
+    <value type="QString" >GS_LIB=/home/risca/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/risca/.gtkrc-2.0::/home/risca/.kde4/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/risca/.gtkrc::/home/risca/.kde4/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/risca</value>
+    <value type="QString" >INFOPATH=/usr/share/info:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/info:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/info</value>
+    <value type="QString" >JAVAC=/etc/java-config-2/current-system-vm/bin/javac</value>
+    <value type="QString" >JAVACC_HOME=/usr/share/javacc/</value>
+    <value type="QString" >JAVA_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >JDK_HOME=/etc/java-config-2/current-system-vm</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=1000</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=sv_SE.UTF-8</value>
+    <value type="QString" >LC_COLLATE=C</value>
+    <value type="QString" >LC_CTYPE=sv_SE.UTF-8</value>
+    <value type="QString" >LESS=-R -M --shift 5</value>
+    <value type="QString" >LESSOPEN=|lesspipe.sh %s</value>
+    <value type="QString" >LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib32/dri</value>
+    <value type="QString" >LOGNAME=risca</value>
+    <value type="QString" >MANPATH=/etc/java-config-2/current-system-vm/man:/usr/local/share/man:/usr/share/man:/usr/share/binutils-data/x86_64-pc-linux-gnu/2.18/man:/usr/share/gcc-data/x86_64-pc-linux-gnu/4.3.4/man:/etc/java-config/system-vm/man/</value>
+    <value type="QString" >OPENGL_PROFILE=ati</value>
+    <value type="QString" >PAGER=/usr/bin/less</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/opt/bin:/usr/x86_64-pc-linux-gnu/i386-unknown-linux-uclibc/gcc-bin/4.4.2:/usr/x86_64-pc-linux-gnu/gcc-bin/4.3.4:/usr/games/bin:$PATH</value>
+    <value type="QString" >PRELINK_PATH_MASK=/usr/lib64/klibc</value>
+    <value type="QString" >PWD=/home/risca</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/risca/.kde4/lib64/kde4/plugins/:/usr/lib64/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/risca-mainframe:@/tmp/.ICE-unix/2075,unix/risca-mainframe:/tmp/.ICE-unix/2075</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=1</value>
+    <value type="QString" >SSH_AGENT_PID=2050</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-zLUWxB2049/agent.2049</value>
+    <value type="QString" >STRIGI_PLUGIN_PATH=/usr/lib64/strigi:</value>
+    <value type="QString" >USER=risca</value>
+    <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
+    <value type="QString" >XDG_CONFIG_DIRS=/etc/xdg</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share:/usr/share/games</value>
+    <value type="QString" >XDG_SESSION_COOKIE=a3527786c09b017e73e4689a4af5ab1b-1262467689.476349-1800892659</value>
+    <value type="QString" >XDM_MANAGED=method=classic</value>
+    <value type="QString" >XSESSION=kde-4</value>
+    <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
-   <value key="abstractProcess.IgnoreReturnValue" type="bool">true</value>
-   <valuelist key="abstractProcess.arguments" type="QVariantList">
-    <value type="QString">clean</value>
-    <value type="QString">-w</value>
+   <value key="abstractProcess.IgnoreReturnValue" type="bool" >true</value>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >clean</value>
+    <value type="QString" >-w</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString">C:/Qt/2009.05/mingw/bin/mingw32-make.exe</value>
-   <value key="abstractProcess.enabled" type="bool">true</value>
-   <value key="abstractProcess.workingDirectory" type="QString">C:/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
-   <value key="cleanConfig" type="bool">true</value>
-   <valuelist key="makeargs" type="QVariantList">
-    <value type="QString">clean</value>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/media/windows/Users/Risca/Documents/Qt-Creator/SR_-_Meta_link_RP_Edition</value>
+   <value key="cleanConfig" type="bool" >true</value>
+   <valuelist key="makeargs" type="QVariantList" >
+    <value type="QString" >clean</value>
    </valuelist>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Release-buildstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
-   <value key="buildConfiguration" type=""></value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="buildConfiguration" type="" ></value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Release-buildstep1</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-Release-cleanstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString">Release</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfigurations</variable>
-  <valuelist type="QVariantList">
-   <value type="QString">Debug</value>
-   <value type="QString">Release</value>
+  <valuelist type="QVariantList" >
+   <value type="QString" >Debug</value>
+   <value type="QString" >Release</value>
   </valuelist>
  </data>
  <data>
   <variable>buildstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
-   <value key="mkspec" type="QString"></value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="mkspec" type="QString" ></value>
   </valuemap>
  </data>
  <data>
   <variable>buildstep1</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
   </valuemap>
  </data>
  <data>
   <variable>buildsteps</variable>
-  <valuelist type="QVariantList">
-   <value type="QString">trolltech.qt4projectmanager.qmake</value>
-   <value type="QString">trolltech.qt4projectmanager.make</value>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.qmake</value>
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
   </valuelist>
  </data>
  <data>
   <variable>cleanstep0</variable>
-  <valuemap type="QVariantMap">
-   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString"></value>
-   <value key="clean" type="bool">true</value>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="clean" type="bool" >true</value>
   </valuemap>
  </data>
  <data>
   <variable>cleansteps</variable>
-  <valuelist type="QVariantList">
-   <value type="QString">trolltech.qt4projectmanager.make</value>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
   </valuelist>
  </data>
  <data>
   <variable>defaultFileEncoding</variable>
-  <value type="QByteArray">System</value>
+  <value type="QByteArray" >System</value>
  </data>
  <data>
   <variable>project</variable>
-  <valuemap type="QVariantMap"/>
+  <valuemap type="QVariantMap" />
  </data>
 </qtcreator>
