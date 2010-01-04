@@ -210,7 +210,6 @@ void Dialog::parseChatCommand(QString command)
     if (!command.isEmpty())
     {
         QTextStream message(&command);
-
         qDebug() << "Received the following CHAT command: " << command;
 
     }
@@ -273,7 +272,6 @@ void Dialog::processData()
 //        emit newMessage(nick, QString::fromUtf8(buffer));
         break;
     case Ping:
-        qDebug() << "PONG!";
         tcpSocket->write("PONG 1 p");
         break;
     case Pong:
