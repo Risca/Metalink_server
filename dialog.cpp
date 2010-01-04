@@ -25,6 +25,7 @@ Dialog::Dialog(QWidget *parent)
     connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
             this, SLOT(displayError(QAbstractSocket::SocketError)));
     connect(this, SIGNAL(receivedNewContactList(QString)), this, SLOT(parseList(QString)));
+    connect(this, SIGNAL(incomingChatCommand(QString)), this, SLOT(parseChatCommand(QString)));
 
     setWindowTitle(tr("Fortune Client"));
 
@@ -204,10 +205,15 @@ void Dialog::parseList(QString rawList)
         clientStream.read(1);
     }
 }
-
 void Dialog::parseChatCommand(QString command)
 {
+    if (!command.isEmpty())
+    {
+        QTextStream message(&command);
 
+        qDebug() << "Received the following CHAT command: " << command;
+
+    }
 }
 
 void Dialog::startChat(QString with)
