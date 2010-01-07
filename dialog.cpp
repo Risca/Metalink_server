@@ -212,6 +212,8 @@ void Dialog::parseChatCommand(QString command)
         QTextStream message(&command);
         qDebug() << "Received the following CHAT command: " << command;
 
+        MetaLinkChat *chat = new MetaLinkChat(this);
+        chat->exec();
     }
 }
 

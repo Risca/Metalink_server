@@ -3,6 +3,7 @@
 
 #include <QtGui>
 #include <QTcpSocket>
+#include "metalinkchat.h"
 
 static const int MaxBufferSize = 1024000;
 
@@ -15,8 +16,7 @@ namespace Ui
 
 class Dialog : public QDialog
 {
-    Q_OBJECT
-
+Q_OBJECT
 public:
     enum ConnectionState {
         SendingNick,

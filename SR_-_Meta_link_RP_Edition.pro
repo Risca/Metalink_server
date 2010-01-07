@@ -9,4 +9,5 @@ SOURCES += main.cpp \
     metalinkchat.cpp
 HEADERS += dialog.h \
     metalinkchat.h
-FORMS += dialog.ui
+FORMS += dialog.ui \
+    chatdialog.ui

@@ -1,17 +1,25 @@
 #ifndef METALINKCHAT_H
 #define METALINKCHAT_H
 
-#include <QDialog>
+#include <QtGui>
+
+namespace Ui
+{
+    class chatDialog;
+}
 
 class MetaLinkChat : public QDialog
 {
 Q_OBJECT
 public:
-    explicit MetaLinkChat(QObject *parent = 0);
+    MetaLinkChat(QWidget *parent = 0);
 
 signals:
 
 public slots:
+
+private:
+    Ui::chatDialog *ui;
 
 };
 

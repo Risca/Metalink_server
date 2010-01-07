@@ -1,10 +1,10 @@
 /********************************************************************************
-** Form generated from reading ui file 'dialog.ui'
+** Form generated from reading UI file 'dialog.ui'
 **
-** Created: Tue Dec 29 04:33:49 2009
-**      by: Qt User Interface Compiler version 4.5.3
+** Created: Wed Jan 6 20:00:12 2010
+**      by: Qt User Interface Compiler version 4.6.0
 **
-** WARNING! All changes made in this file will be lost when recompiling ui file!
+** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
 #ifndef UI_DIALOG_H
@@ -20,7 +20,7 @@
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
-#include <QtGui/QListView>
+#include <QtGui/QListWidget>
 #include <QtGui/QPlainTextEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QVBoxLayout>
@@ -44,16 +44,16 @@ public:
     QPushButton *sendButton;
     QPushButton *connectButton;
     QPushButton *quitButton;
-    QListView *listView;
+    QListWidget *listWidget;
 
     void setupUi(QDialog *Dialog)
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(328, 352);
+        Dialog->resize(433, 352);
         horizontalLayout_2 = new QHBoxLayout(Dialog);
         horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setMargin(11);
+        horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -125,12 +125,10 @@ public:
 
         horizontalLayout_2->addLayout(verticalLayout);
 
-        listView = new QListView(Dialog);
-        listView->setObjectName(QString::fromUtf8("listView"));
-        listView->setMinimumSize(QSize(160, 0));
-        listView->setMaximumSize(QSize(160, 16777215));
+        listWidget = new QListWidget(Dialog);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
 
-        horizontalLayout_2->addWidget(listView);
+        horizontalLayout_2->addWidget(listWidget);
 
 
         retranslateUi(Dialog);
@@ -155,7 +153,6 @@ public:
         connectButton->setShortcut(QApplication::translate("Dialog", "Ctrl+O", 0, QApplication::UnicodeUTF8));
         quitButton->setText(QApplication::translate("Dialog", "&Quit", 0, QApplication::UnicodeUTF8));
         quitButton->setShortcut(QApplication::translate("Dialog", "Ctrl+Q", 0, QApplication::UnicodeUTF8));
-        Q_UNUSED(Dialog);
     } // retranslateUi
 
 };
