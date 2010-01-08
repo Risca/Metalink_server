@@ -62,6 +62,7 @@ private:
     bool readProtocolHeader();
     bool hasEnoughData();
     void processData();
+    void acceptChatInvite(int chatID);
 
     QTcpSocket *tcpSocket;
     quint16 blockSize;
@@ -72,6 +73,7 @@ private:
     QTimer pingTimer;
     QTime pongTime;
     int transferTimerId;
+    QList<MetaLinkChat*> chats;
 
 private slots:
     void startChat(QModelIndex index);

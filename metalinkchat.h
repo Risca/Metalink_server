@@ -12,13 +12,19 @@ class MetaLinkChat : public QDialog
 {
 Q_OBJECT
 public:
-    MetaLinkChat(QWidget *parent = 0);
+//    MetaLinkChat(int ID, QWidget *parent = 0);
+    MetaLinkChat(int ID, QString firstParticipant, QWidget *parent = 0);
+    MetaLinkChat(int ID, QStringList firstParticipants, QWidget *parent = 0);
 
+    int id();
+    void newParticipantList(QStringList participants);
+    void addParticipant(QString nick);
 signals:
 
 public slots:
 
 private:
+    int myChatID;
     Ui::chatDialog *ui;
 
 };

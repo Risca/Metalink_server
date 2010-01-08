@@ -17,21 +17,31 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit"/>
+      <widget class="QPlainTextEdit" name="plainTextEdit">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QListWidget" name="listWidget">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>160</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>120</width>
+         <width>160</width>
          <height>16777215</height>
         </size>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -60,12 +70,21 @@
        <property name="text">
         <string>&amp;Send</string>
        </property>
+       <property name="shortcut">
+        <string>Ctrl+Return</string>
+       </property>
       </widget>
      </item>
     </layout>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>plainTextEdit_2</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>plainTextEdit</tabstop>
+  <tabstop>listWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
