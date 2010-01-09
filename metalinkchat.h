@@ -13,8 +13,8 @@ class MetaLinkChat : public QDialog
 Q_OBJECT
 public:
 //    MetaLinkChat(int ID, QWidget *parent = 0);
-    MetaLinkChat(int ID, QString firstParticipant, QWidget *parent = 0);
-    MetaLinkChat(int ID, QStringList firstParticipants, QWidget *parent = 0);
+    MetaLinkChat(int ID, QString nick, QString firstParticipant, QWidget *parent = 0);
+    MetaLinkChat(int ID, QString nick, QStringList firstParticipants, QWidget *parent = 0);
 
     int id();
     void newParticipantList(QStringList participants);
@@ -22,9 +22,12 @@ public:
 signals:
 
 public slots:
+    void parseChatCommand(QString command);
+    void updateNick(QString &nick);
 
 private:
     int myChatID;
+    QString myNick;
     Ui::chatDialog *ui;
 
 };

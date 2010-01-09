@@ -36,6 +36,8 @@ public:
     Dialog(QWidget *parent = 0);
     ~Dialog();
 
+    static QStringList parseMetaLinkList(QString list);
+
 signals:
     void receivedNewContactList(QString rawList);
     void incomingChatCommand(QString command);
@@ -53,7 +55,7 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void sendMessage();
     void parseList(QString rawList);
-    void parseChatCommand(QString command);
+    void parseChatCommand(QString &message);
     void startChat(QString with);
 
 private:
@@ -62,7 +64,7 @@ private:
     bool readProtocolHeader();
     bool hasEnoughData();
     void processData();
-    void acceptChatInvite(int chatID);
+    void acceptChatInvite(MetaLinkChat *chat);
 
     QTcpSocket *tcpSocket;
     quint16 blockSize;

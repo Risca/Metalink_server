@@ -43,6 +43,25 @@ Dialog::~Dialog()
     delete ui;
 }
 
+QStringList Dialog::parseMetaLinkList(QString list)
+{
+    QStringList receivedNicks;
+    QTextStream message(&list);
+    int numberOfNicks;
+    message >> numberOfNicks;
+//  qDebug() << "Number of connected clients: " << QString::number(numberOfNicks);
+    int lengthOfNick;
+    QString nick;
+    while (numberOfNicks) {
+        message >> lengthOfNick;
+        message.read(1);
+        receivedNicks.append(message.read(lengthOfNick));
+        message.read(1);
+        numberOfNicks--;
+    }
+    return receivedNicks;
+}
+
 QString Dialog::nick()
 {
     return ui->nickLineEdit->text();
@@ -190,12 +209,12 @@ void Dialog::parseList(QString rawList)
     ui->listWidget->clear();
     qDebug() << "Received client list!\n" << rawList;
     QTextStream clientStream(&rawList);
-    int numberOfClients;
-    clientStream >> numberOfClients;
-    qDebug() << "Number of connected clients: " << QString::number(numberOfClients);
+    int numberOfNicks;
+    clientStream >> numberOfNicks;
+    qDebug() << "Number of connected clients: " << QString::number(numberOfNicks);
     int lengthOfNick;
     QString nick;
-    for(int i = 0; i < numberOfClients; i++) {
+    for(int i = 0; i < numberOfNicks; i++) {
         clientStream >> lengthOfNick;
         qDebug() << "Length of nick: " << QString::number(lengthOfNick);
         clientStream.read(1);
@@ -205,64 +224,66 @@ void Dialog::parseList(QString rawList)
         clientStream.read(1);
     }
 }
-void Dialog::parseChatCommand(QString command)
+void Dialog::parseChatCommand(QString &command)
 {
     if (!command.isEmpty())
     {
         QTextStream message(&command);
         qDebug() << "Received the following CHAT command: " << command;
 
-        QString operation;
-        message >> operation;
-        if(operation == "INVITE") {
-            int chatID;
-            message >> chatID;
-            int numberOfClients;
-            message >> numberOfClients;
-//            qDebug() << "Number of connected clients: " << QString::number(numberOfClients);
-            int lengthOfNick;
-            QStringList receivedNicks;
-            QString nick;
-            for(int i = 0; i < numberOfClients; i++) {
-                message >> lengthOfNick;
-//                qDebug() << "Length of nick: " << QString::number(lengthOfNick);
-                message.read(1);
-                nick = message.read(lengthOfNick);
-//                qDebug() << "Nick: " << nick;
-                receivedNicks << nick;
-//                ui->listWidget->addItem(nick);
-                message.read(1);
+        int chatID;
+        message >> chatID;
+
+        int i = 0;
+        bool found = false;
+        do {
+            if (chats.at(i)->id() == chatID) {
+                found = true;
+                break;
             }
+            i++;
+        } while(i < chats.size());
 
-//            qDebug() << "My nick: " << this->nick();
-//            qDebug() << "Received nicks: " << receivedNicks;
-            if(!receivedNicks.contains(this->nick())) {
-                QString contactList = receivedNicks.at(0);
-                for (int i = 1; i < receivedNicks.size(); i++) {
-                    contactList += '\n' + receivedNicks.at(i);
-                }
-
-                int ret = QMessageBox::question(this, tr("New chat"),
-                                                tr("The following people wants to contact you:\n") +
-                                                contactList, QMessageBox::Ok, QMessageBox::Cancel);
-
-                if (ret == QMessageBox::Ok) {
-                    MetaLinkChat *chat = new MetaLinkChat(chatID, receivedNicks, this);
+        if(found) {
+            chats.at(i)->parseChatCommand(message.readAll());
+        } else {
+            QString operation;
+            message >> operation;
+            if(operation == "INVITE") {
+                QStringList receivedNicks = parseMetaLinkList(message.readAll());
+                // I requested this chat session if
+                if(receivedNicks.contains(this->nick())) {
+                    MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks, this);
                     chats.append(chat);
-                    acceptChatInvite(chatID);
-                }
-            } else {
-                MetaLinkChat *chat = new MetaLinkChat(chatID, receivedNicks, this);
-                chats.append(chat);
-            }
+                } else {
+                    /*
+                    QString contactList = receivedNicks.at(0);
+                    for (int i = 1; i < receivedNicks.size(); i++) {
+                        contactList += '\n' + receivedNicks.at(i);
+                    }
+                    */
+                    int ret = QMessageBox::question(this, tr("New chat"),
+                                                    tr("The following people wants to contact you:\n") +
+                                                    receivedNicks.join("\n"),
+                                                    QMessageBox::Ok, QMessageBox::Cancel);
 
-            chats.last()->show();
-            chats.last()->raise();
-            chats.last()->activateWindow();
+                    if (ret == QMessageBox::Ok) {
+                        MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks, this);
+                        chats.append(chat);
+                        acceptChatInvite(chat);
+                    }
+                }
+
+                chats.last()->show();
+                chats.last()->raise();
+                chats.last()->activateWindow();
+            } else {
+                qDebug() << "Received unknown chat ID, but no invite command :S";
+            }
         }
+
+/*
         else if (operation == "LIST") {
-            int chatID;
-            message >> chatID;
             qDebug() << "ChatID: " << QString::number(chatID);
             for (int i=0; i < chats.size(); i++) {
                 if (chats.at(i)->id() == chatID) {
@@ -287,6 +308,7 @@ void Dialog::parseChatCommand(QString command)
                 }
             }
         }
+        */
     }
 }
 
@@ -310,9 +332,9 @@ void Dialog::startChat(QModelIndex index)
     startChat(index.data().toString());
 }
 
-void Dialog::acceptChatInvite(int chatID)
+void Dialog::acceptChatInvite(MetaLinkChat *chat)
 {
-    QByteArray message = "ACCEPT " + QByteArray::number(chatID);
+    QByteArray message = QByteArray::number(chat->id()) + " ACCEPT";
     QByteArray data = "CHAT " + QByteArray::number(message.size()) + " " + message;
 
     if (tcpSocket->write(data) == data.size()){
