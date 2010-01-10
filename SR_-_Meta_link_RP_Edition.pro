@@ -6,8 +6,10 @@ TARGET = SR_-_Meta_link_RP_Edition
 TEMPLATE = app
 SOURCES += main.cpp \
     dialog.cpp \
-    metalinkchat.cpp
+    metalinkchat.cpp \
+    metalinkconnection.cpp
 HEADERS += dialog.h \
-    metalinkchat.h
+    metalinkchat.h \
+    metalinkconnection.h
 FORMS += dialog.ui \
     chatdialog.ui
