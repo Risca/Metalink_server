@@ -1,6 +1,7 @@
 #include <QtGui>
 
 #include "metalinkchat.h"
+#include "metalinkconnection.h"
 #include "ui_chatdialog.h"
 /*
 MetaLinkChat::MetaLinkChat(int ID, QWidget *parent) :
@@ -120,7 +121,7 @@ void MetaLinkChat::parseChatCommand(QString command)
     case Invite:
         break;
     case List:
-        ListOfNicks = Dialog::parseMetaLinkList(command);
+        ListOfNicks = MetaLinkConnection::parseMetaLinkList(command);
         newParticipantList(ListOfNicks);
         break;
     case Accept:
