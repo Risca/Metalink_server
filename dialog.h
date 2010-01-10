@@ -4,6 +4,7 @@
 #include <QtGui>
 #include <QTcpSocket>
 #include "metalinkchat.h"
+class MetaLinkChat;
 
 static const int MaxBufferSize = 1024000;
 
@@ -42,10 +43,6 @@ signals:
     void receivedNewContactList(QString rawList);
     void incomingChatCommand(QString command);
     
-private:
-    Ui::Dialog *ui;
-    QString nick();
-
 private slots:
     void activateSendButton();
     void connectToHost();
@@ -55,10 +52,14 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
     void sendMessage();
     void parseList(QString rawList);
-    void parseChatCommand(QString &message);
+    void parseChatCommand(QString message);
     void startChat(QString with);
+    void closeChat(MetaLinkChat *chat);
 
 private:
+    Ui::Dialog *ui;
+    QString nick();
+
     int readDataIntoBuffer(int maxSize = MaxBufferSize);
     int dataLengthForCurrentDataType();
     bool readProtocolHeader();
