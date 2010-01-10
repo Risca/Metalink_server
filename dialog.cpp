@@ -75,6 +75,11 @@ void Dialog::displayError(QAbstractSocket::SocketError socketError)
     }
 }
 
+void Dialog::sendMessage()
+{
+    connection->sendMessage(MetaLinkConnection::Message, ui->plainTextEdit->toPlainText());
+}
+
 void Dialog::closeChat(MetaLinkChat *chat)
 {
     chats.removeAll(chat);
