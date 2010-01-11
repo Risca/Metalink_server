@@ -22,12 +22,13 @@ public:
         Accept,
         Reject,
         Leave,
+        Message,
         Undefined
     };
 
 //    MetaLinkChat(int ID, QWidget *parent = 0);
-    MetaLinkChat(int ID, QString nick, QString firstParticipant, QTcpSocket *socket, QWidget *parent = 0);
-    MetaLinkChat(int ID, QString nick, QStringList firstParticipants, QTcpSocket *socket, QWidget *parent = 0);
+    MetaLinkChat(int ID, QString nick, QString firstParticipant, MetaLinkConnection *connection, QWidget *parent = 0);
+    MetaLinkChat(int ID, QString nick, QStringList firstParticipants, MetaLinkConnection *connection, QWidget *parent = 0);
     ~MetaLinkChat();
 
     int id();
@@ -36,26 +37,25 @@ public:
     QStringList participants();
     QString makeChatCommand(ChatCommand commandType, QString &message);
     static ChatCommand determineTypeOfCommand(QString &command);
-
-signals:
-    void newMessage(QString message);
-    void newChatCommand(QString message);
-    void leave(MetaLinkChat*);
+    void reject();
 
 public slots:
     void parseChatCommand(QString command);
     void updateNick(QString &nick);
     void sendMessage();
+    void sendCommand(ChatCommand type, QString *command = new QString);
+    void appendMessage(QString *from, QString *message);
+
+signals:
+    void newMessage(QString *from, QString *message);
+    void leave(MetaLinkChat*);
 
 private:
     int myChatID;
     QString myNick;
     Ui::chatDialog *ui;
     QTcpSocket *tcpSocket;
-
-private slots:
-    void sendCommand(ChatCommand type, QString *command = new QString);
-    void windowClosed();
+    MetaLinkConnection *myConnection;
 };
 
 #endif // METALINKCHAT_H

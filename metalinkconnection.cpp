@@ -8,16 +8,16 @@ static const int PongTimeout = 60 * 1000;
 static const int PingInterval = 5 * 1000;
 static const char SeparatorToken = ' ';
 
-MetaLinkConnection::MetaLinkConnection(QObject *parent)
+MetaLinkConnection::MetaLinkConnection(QObject *parent) :
+        QTcpSocket(parent), myNick(new QString)
 {
 
     tcpSocket = new QTcpSocket(this);
     currentState = SendingNick;
     currentDataType = Undefined;
 
+    connect(tcpSocket, SIGNAL(connected()), this, SLOT(sendNick()));
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(processReadyRead()));
-    connect(this, SIGNAL(receivedNewContactList(QString)), this, SLOT(parseList(QString)));
-    connect(this, SIGNAL(incomingChatCommand(QString)), this, SLOT(parseChatCommand(QString)));
 
     numBytesForCurrentDataType = -1;
     transferTimerId = 0;
@@ -35,9 +35,9 @@ void MetaLinkConnection::timerEvent(QTimerEvent *timerEvent)
     }
 }
 
-QString MetaLinkConnection::nick() const
+QString & MetaLinkConnection::nick() const
 {
-    return myNick;
+    return *myNick;
 }
 
 bool MetaLinkConnection::ready()
@@ -52,7 +52,7 @@ void MetaLinkConnection::connectToHost(const QString &hostName, quint16 port, Op
 {
     blockSize = 0;
     tcpSocket->abort();
-    tcpSocket->connectToHost(hostName, port);
+    tcpSocket->connectToHost(hostName, port, mode);
 }
 
 QString MetaLinkConnection::makeMetaLinkList(QStringList nicks)
@@ -73,13 +73,12 @@ QString MetaLinkConnection::makeMetaLinkList(QStringList nicks)
     }
 }
 
-QStringList MetaLinkConnection::parseMetaLinkList(QString list)
+QStringList MetaLinkConnection::parseMetaLinkList(QString &list)
 {
     QStringList receivedItems;
     QTextStream message(&list);
     int numberOfItems;
     message >> numberOfItems;
-//  qDebug() << "Number of connected clients: " << QString::number(numberOfItems);
     int lengthOfItem;
     while (numberOfItems) {
         message >> lengthOfItem;
@@ -88,6 +87,8 @@ QStringList MetaLinkConnection::parseMetaLinkList(QString list)
         message.read(1);
         numberOfItems--;
     }
+    //Rest is not part of MetaLinkList
+    list = message.readAll();
     return receivedItems;
 }
 
@@ -97,6 +98,11 @@ bool MetaLinkConnection::operator ==(const MetaLinkConnection& other) const
         return true;
     else
         return false;
+}
+
+void MetaLinkConnection::setNick(QString nick)
+{
+    *myNick = nick;
 }
 
 void MetaLinkConnection::processReadyRead()
@@ -119,57 +125,50 @@ void MetaLinkConnection::sendPing()
         return;
     }
 
-    write("PING 1 p");
+    send(Ping);
 }
 
 void MetaLinkConnection::sendNick()
 {
-    QByteArray greeting = nick().toUtf8();
-    QByteArray data = "NICK " + QByteArray::number(greeting.size()) + " " + greeting;
-    if (tcpSocket->write(data) == data.size()){
-//        isGreetingMessageSent = true;
-        qDebug() << "Sent nick!";
-        currentState = awaitingClientList;
-        pingTimer.start();
-        pongTime.start();
-    }
+    send(Nick, myNick);
+    currentState = AwaitingClientList;
+    pingTimer.start();
+    pongTime.start();
 }
 
-void MetaLinkConnection::sendMessage(DataType type, QString message)
+void MetaLinkConnection::send(DataType type, QString *message)
 {
-    QByteArray data(QByteArray::number(message.size()) + " " + message.toUtf8());
+    QByteArray data(QByteArray::number(message->size()) + " " + message->toUtf8());
 
     switch(type) {
-    case Message:
-        data.prepend("MESSAGE ");
-        break;
     case Ping:
-//        data.prepend("PING "); //Please use sendPing();
+        data.prepend("PING ");
         break;
-    case Chat:
-        data.prepend("CHAT ");
+    case Pong:
+        data.prepend("PONG ");
+        break;
+    case Nick:
+        data.prepend("NICK ");
         break;
     case List:
         data.prepend("LIST ");
+        break;
+    case Chat:
+        data.prepend("CHAT ");
         break;
     default:
         break;
     }
 
-    if (write(data) == data.size()) {
-        qDebug() << "Sent message: " << data;
+    if (tcpSocket->write(data) == data.size()) {
+        if(type!=Ping && type!=Pong) { //Filter out some pings and pongs
+            qDebug() << "Sent message: " << data;
+        }
     }
-}
-
-void MetaLinkConnection::parseList(QString rawList)
-{
-    qDebug() << "Received client list!\n" << rawList;
-    emit incomingContactList(new QStringList(parseMetaLinkList(rawList)));
 }
 
 void MetaLinkConnection::startChat(QModelIndex index)
 {
-    qDebug() << "You double-clicked on: " << index.data();
     startChat(index.data().toString());
 }
 
@@ -177,13 +176,9 @@ void MetaLinkConnection::startChat(QString with)
 {
     if(!with.isEmpty())
     {
-        QByteArray message = "INIT " + QByteArray::number(1);
-        message += " " + QByteArray::number(with.size()) + " " + with.toUtf8();
-        QByteArray data = "CHAT " + QByteArray::number(message.size()) + " " + message;
-
-        if (tcpSocket->write(data) == data.size()){
-            qDebug() << "Sent CHAT INIT!";
-        }
+        QString message = "0 INIT " + QString::number(1);
+        message += " " + QString::number(with.size()) + " " + with;
+        send(Chat, &message);
     }
 }
 
@@ -229,14 +224,11 @@ bool MetaLinkConnection::readProtocolHeader()
         currentDataType = Ping;
     } else if (buffer == "PONG ") {
         currentDataType = Pong;
-    } else if (buffer == "MESSAGE ") {
-        currentDataType = Message;
     } else if (buffer == "NICK ") {
         currentDataType = Nick;
     } else if (buffer == "LIST ") {
         currentDataType = List;
     } else if (buffer == "CHAT ") {
-        qDebug() << "Received a CHAT command";
         currentDataType = Chat;
     } else {
         currentDataType = Undefined;
@@ -276,21 +268,26 @@ void MetaLinkConnection::processData()
         return;
     }
 
+    QString temp;
+    QStringList receivedNicks;
     switch (currentDataType) {
-    case Message:
-//        emit newMessage(nick, QString::fromUtf8(buffer));
-        break;
     case Ping:
-        tcpSocket->write("PONG 1 p");
+        send(Pong);
         break;
     case Pong:
         pongTime.restart();
         break;
     case List:
-        emit receivedNewContactList(QString::fromUtf8(buffer));
+        if(currentState==AwaitingClientList) {
+            currentState=ReadyForUse;
+            emit readyForUse();
+        }
+        temp = QString::fromUtf8(buffer);
+        receivedNicks = parseMetaLinkList(temp);
+        qDebug() << "Received list: " << receivedNicks;
+        emit incomingContactList(receivedNicks);
         break;
     case Chat:
-        qDebug() << "Received a CHAT command";
         emit incomingChatCommand(QString::fromUtf8(buffer));
         break;
     default:
@@ -300,14 +297,4 @@ void MetaLinkConnection::processData()
     currentDataType = Undefined;
     numBytesForCurrentDataType = 0;
     buffer.clear();
-}
-
-void MetaLinkConnection::acceptChatInvite(MetaLinkChat *chat)
-{
-    QByteArray message = QByteArray::number(chat->id()) + " ACCEPT";
-    QByteArray data = "CHAT " + QByteArray::number(message.size()) + " " + message;
-
-    if (tcpSocket->write(data) == data.size()){
-        qDebug() << "Sent CHAT ACCEPT!";
-    }
 }

@@ -21,11 +21,10 @@ class MetaLinkConnection : public QTcpSocket
 public:
     enum ConnectionState {
         SendingNick,
-        awaitingClientList,
+        AwaitingClientList,
         ReadyForUse
     };
     enum DataType {
-        Message,
         Ping,
         Pong,
         Nick,
@@ -36,21 +35,21 @@ public:
 
     MetaLinkConnection(QObject *parent = 0);
 
-    QString nick() const;
+    QString & nick() const;
     bool ready();
     void connectToHost(const QString &hostName, quint16 port, OpenMode mode = ReadWrite);
 
     static QString makeMetaLinkList(QStringList nicks);
-    static QStringList parseMetaLinkList(QString list);
+    static QStringList parseMetaLinkList(QString &list);
     bool operator==(const MetaLinkConnection& other) const;
 
 public slots:
-    void sendMessage(DataType type, QString message);
-    void acceptChatInvite(MetaLinkChat *chat);
+    void setNick(QString nick);
+    void send(DataType type, QString *message = new QString("p"));
+    void startChat(QModelIndex index);
 
 signals:
-    void receivedNewContactList(QString);
-    void incomingContactList(QStringList*);
+    void incomingContactList(QStringList&);
     void incomingChatCommand(QString);
     void readyForUse();
 
@@ -61,10 +60,6 @@ private slots:
     void processReadyRead();
     void sendPing();
     void sendNick();
-    void sendMessage(QString message);
-    void parseList(QString rawList);
-    void parseChatCommand(QString message);
-    void startChat(QModelIndex index);
     void startChat(QString with);
 
 private:
@@ -83,7 +78,7 @@ private:
     QTimer pingTimer;
     QTime pongTime;
     int transferTimerId;
-    QString myNick;
+    QString *myNick;
 };
 
 #endif // METALINKCONNECTION_H

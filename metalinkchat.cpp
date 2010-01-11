@@ -10,27 +10,32 @@ MetaLinkChat::MetaLinkChat(int ID, QWidget *parent) :
     ui->setupUi(this);
 }
 */
-MetaLinkChat::MetaLinkChat(int ID, QString nick, QString firstParticipant, QTcpSocket *socket, QWidget *parent) :
-    QDialog(parent), myChatID(ID), myNick(nick), ui(new Ui::chatDialog), tcpSocket(socket)
+MetaLinkChat::MetaLinkChat(int ID, QString nick, QString firstParticipant, MetaLinkConnection *connection, QWidget *parent) :
+    QDialog(parent), myChatID(ID), myNick(nick), ui(new Ui::chatDialog), myConnection(connection)
 {
     ui->setupUi(this);
     if(!firstParticipant.isEmpty())
         ui->listWidget->addItem(firstParticipant);
-    connect(this, SIGNAL(rejected()), this, SLOT(windowClosed()));
+//    connect(this, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
+    connect(this, SIGNAL(newMessage(QString*,QString*)),
+            this, SLOT(appendMessage(QString*,QString*)));
 }
 
-MetaLinkChat::MetaLinkChat(int ID, QString nick, QStringList firstParticipants, QTcpSocket *socket, QWidget *parent) :
-    QDialog(parent), myChatID(ID), myNick(nick), ui(new Ui::chatDialog), tcpSocket(socket)
+MetaLinkChat::MetaLinkChat(int ID, QString nick, QStringList firstParticipants, MetaLinkConnection *connection, QWidget *parent) :
+    QDialog(parent), myChatID(ID), myNick(nick), ui(new Ui::chatDialog), myConnection(connection)
 {
     ui->setupUi(this);
     if(!firstParticipants.isEmpty())
         ui->listWidget->addItems(firstParticipants);
-    connect(this, SIGNAL(rejected()), this, SLOT(windowClosed()));
+//    connect(this, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
+    connect(this, SIGNAL(newMessage(QString*,QString*)),
+            this, SLOT(appendMessage(QString*,QString*)));
 }
 
 MetaLinkChat::~MetaLinkChat()
 {
-    sendCommand(MetaLinkChat::Leave);
 }
 
 int MetaLinkChat::id()
@@ -80,6 +85,9 @@ QString MetaLinkChat::makeChatCommand(ChatCommand commandType, QString &message)
     case Leave:
         message.prepend(QString::number(myChatID) + " LEAVE ");
         break;
+    case Message:
+        message.prepend(QString::number(myChatID) + " MESSAGE ");
+        break;
     default:
         break;
     }
@@ -105,30 +113,47 @@ MetaLinkChat::ChatCommand MetaLinkChat::determineTypeOfCommand(QString &command)
         return MetaLinkChat::Reject;
     } else if (type == "LEAVE") {
         return MetaLinkChat::Leave;
+    } else if (type == "MESSAGE") {
+        return MetaLinkChat::Message;
     } else {
         return MetaLinkChat::Undefined;
     }
 }
 
+void MetaLinkChat::reject()
+{
+    sendCommand(MetaLinkChat::Leave);
+    emit leave(this);
+
+    QDialog::reject();
+}
+
 void MetaLinkChat::parseChatCommand(QString command)
 {
     ChatCommand currentChatCommand = determineTypeOfCommand(command);
-    QStringList ListOfNicks;
+    QStringList receivedNicks;
 
+    qDebug() << "Chat ID: " << QString::number(myChatID);
     switch (currentChatCommand) {
     case Init:
         break;
     case Invite:
         break;
     case List:
-        ListOfNicks = MetaLinkConnection::parseMetaLinkList(command);
-        newParticipantList(ListOfNicks);
+        receivedNicks = MetaLinkConnection::parseMetaLinkList(command);
+        qDebug() << "Received chat list: " << receivedNicks;
+        newParticipantList(receivedNicks);
         break;
     case Accept:
         break;
     case Reject:
         break;
     case Leave:
+        break;
+    case Message:
+        receivedNicks = MetaLinkConnection::parseMetaLinkList(command);
+        emit newMessage(&receivedNicks.first(), &command);
+        qDebug() << "Received a Message from: " << receivedNicks;
         break;
     case Undefined:
         qDebug() << "Undefined CHAT command";
@@ -145,22 +170,22 @@ void MetaLinkChat::updateNick(QString &nick)
 
 void MetaLinkChat::sendMessage()
 {
-    //Fix!
+    QString message = ui->messagePlainTextEdit->toPlainText();
+    ui->messagePlainTextEdit->clear();
+    if(!message.isEmpty()) {
+        sendCommand(Message, &message);
+    }
 }
 
 void MetaLinkChat::sendCommand(ChatCommand type, QString *command)
 {
     makeChatCommand(type, *command);
-    QByteArray data = "CHAT " + QByteArray::number(command->size()) + " " + command->toUtf8();
-
-    if (tcpSocket->write(data) == data.size()){
-        qDebug() << "Sent CHAT command: " << *command;
-    }
-    emit newChatCommand(*command);
+    myConnection->send(MetaLinkConnection::Chat, command);
 }
 
-void MetaLinkChat::windowClosed()
+void MetaLinkChat::appendMessage(QString *from, QString *message)
 {
-    sendCommand(MetaLinkChat::Leave);
-    emit leave(this);
+    if(participants().contains(*from) && !message->isEmpty()) {
+        ui->historyPlainTextEdit->appendPlainText(*from + ":\n  " + *message);
+    }
 }

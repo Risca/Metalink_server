@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit">
+      <widget class="QPlainTextEdit" name="historyPlainTextEdit">
        <property name="readOnly">
         <bool>true</bool>
        </property>
@@ -50,7 +50,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit_2">
+      <widget class="QPlainTextEdit" name="messagePlainTextEdit">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -66,7 +66,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="sendButton">
        <property name="text">
         <string>&amp;Send</string>
        </property>
@@ -80,9 +80,9 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>plainTextEdit_2</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>plainTextEdit</tabstop>
+  <tabstop>messagePlainTextEdit</tabstop>
+  <tabstop>sendButton</tabstop>
+  <tabstop>historyPlainTextEdit</tabstop>
   <tabstop>listWidget</tabstop>
  </tabstops>
  <resources/>

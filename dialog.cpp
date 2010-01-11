@@ -11,19 +11,22 @@ Dialog::Dialog(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->connectButton, SIGNAL(clicked()),
-            this, SLOT(connectToHost()));
+    connect(ui->connectButton, SIGNAL(clicked()), this, SLOT(connectToHost()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
+
+    connection->setNick(ui->nickLineEdit->text());
+    connect(ui->nickLineEdit, SIGNAL(textChanged(QString)), connection, SLOT(setNick(QString)));
+
     connect(connection, SIGNAL(error(QAbstractSocket::SocketError)),
             this, SLOT(displayError(QAbstractSocket::SocketError)));
-    connect(connection, SIGNAL(connected()), this, SLOT(activateSendButton()));
-    connect(connection, SIGNAL(connected()), this, SLOT(sendNick()));
-    connect(connection, SIGNAL(incomingContactList(QStringList*)),
+    connect(connection, SIGNAL(readyForUse()), this, SLOT(activateSendButton()));
+    connect(connection, SIGNAL(incomingContactList(QStringList&)),
             this, SLOT(updateContactList(QStringList&)));
+    connect(connection, SIGNAL(incomingChatCommand(QString)), this, SLOT(parseChatCommand(QString)));
 
     setWindowTitle(tr("MetaLink Client"));
 
-    connect(ui->listWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(startChat(QModelIndex)));
+    connect(ui->listWidget, SIGNAL(doubleClicked(QModelIndex)), connection, SLOT(startChat(QModelIndex)));
     ui->portLineEdit->setFocus();
 }
 
@@ -45,10 +48,7 @@ void Dialog::connectToHost()
 
 void Dialog::activateSendButton()
 {
-    if(connection->state() == QTcpSocket::ConnectedState)
-    {
-        ui->sendButton->setEnabled(true);
-    }
+    ui->sendButton->setEnabled(true);
 }
 
 void Dialog::displayError(QAbstractSocket::SocketError socketError)
@@ -77,7 +77,9 @@ void Dialog::displayError(QAbstractSocket::SocketError socketError)
 
 void Dialog::sendMessage()
 {
-    connection->sendMessage(MetaLinkConnection::Message, ui->plainTextEdit->toPlainText());
+    QString message = ui->plainTextEdit->toPlainText();
+    message.prepend("0 MESSAGE ");
+    connection->send(MetaLinkConnection::Chat, &message);
 }
 
 void Dialog::closeChat(MetaLinkChat *chat)
@@ -96,7 +98,6 @@ void Dialog::parseChatCommand(QString command)
     if (!command.isEmpty())
     {
         QTextStream message(&command);
-        qDebug() << "Received the following CHAT command: " << command;
 
         int chatID;
         message >> chatID;
@@ -120,12 +121,14 @@ void Dialog::parseChatCommand(QString command)
             QString operation;
             message >> operation;
             if(operation == "INVITE") {
-                QStringList receivedNicks = MetaLinkConnection::parseMetaLinkList(message.readAll());
+                QString *temp = new QString(message.readAll());
+                QStringList receivedNicks = MetaLinkConnection::parseMetaLinkList(*temp);
                 // I requested this chat session if
                 if(receivedNicks.contains(this->nick())) {
                     MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks,
                                                           connection, this);
                     chats.append(chat);
+                    chat->sendCommand(MetaLinkChat::Accept);
                     connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
                 } else {
                     int ret = QMessageBox::question(this, tr("New chat"),
@@ -137,7 +140,7 @@ void Dialog::parseChatCommand(QString command)
                         MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks,
                                                               connection, this);
                         chats.append(chat);
-                        connection->acceptChatInvite(chat);
+                        chat->sendCommand(MetaLinkChat::Accept);
                         connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
                     }
                 }
