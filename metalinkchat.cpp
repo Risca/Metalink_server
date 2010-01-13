@@ -17,6 +17,7 @@ MetaLinkChat::MetaLinkChat(int ID, QString nick, QString firstParticipant, MetaL
     if(!firstParticipant.isEmpty())
         ui->listWidget->addItem(firstParticipant);
 //    connect(this, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->messagePlainTextEdit, SIGNAL(textChanged()), this, SLOT(saveText()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
     connect(this, SIGNAL(newMessage(QString*,QString*)),
             this, SLOT(appendMessage(QString*,QString*)));
@@ -29,6 +30,7 @@ MetaLinkChat::MetaLinkChat(int ID, QString nick, QStringList firstParticipants, 
     if(!firstParticipants.isEmpty())
         ui->listWidget->addItems(firstParticipants);
 //    connect(this, SIGNAL(rejected()), this, SLOT(reject()));
+    connect(ui->messagePlainTextEdit, SIGNAL(textChanged()), this, SLOT(saveText()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
     connect(this, SIGNAL(newMessage(QString*,QString*)),
             this, SLOT(appendMessage(QString*,QString*)));
@@ -170,16 +172,18 @@ void MetaLinkChat::updateNick(QString &nick)
 
 void MetaLinkChat::sendMessage()
 {
-    QString message = ui->messagePlainTextEdit->toPlainText();
-    ui->messagePlainTextEdit->clear();
-    if(!message.isEmpty()) {
-        sendCommand(Message, &message);
+    QString text = ui->messagePlainTextEdit->toPlainText();
+    qDebug() << "Read " << text;
+    if(!text.isEmpty()) {
+        sendCommand(Message, &text);
     }
+    ui->messagePlainTextEdit->clear();
 }
 
 void MetaLinkChat::sendCommand(ChatCommand type, QString *command)
 {
     makeChatCommand(type, *command);
+    qDebug() << "Command " << *command;
     myConnection->send(MetaLinkConnection::Chat, command);
 }
 

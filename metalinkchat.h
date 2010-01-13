@@ -39,6 +39,10 @@ public:
     static ChatCommand determineTypeOfCommand(QString &command);
     void reject();
 
+signals:
+    void newMessage(QString *from, QString *message);
+    void leave(MetaLinkChat*);
+
 public slots:
     void parseChatCommand(QString command);
     void updateNick(QString &nick);
@@ -46,16 +50,13 @@ public slots:
     void sendCommand(ChatCommand type, QString *command = new QString);
     void appendMessage(QString *from, QString *message);
 
-signals:
-    void newMessage(QString *from, QString *message);
-    void leave(MetaLinkChat*);
-
 private:
     int myChatID;
     QString myNick;
     Ui::chatDialog *ui;
     QTcpSocket *tcpSocket;
     MetaLinkConnection *myConnection;
+
 };
 
 #endif // METALINKCHAT_H

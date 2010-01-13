@@ -138,7 +138,9 @@ void MetaLinkConnection::sendNick()
 
 void MetaLinkConnection::send(DataType type, QString *message)
 {
-    QByteArray data(QByteArray::number(message->size()) + " " + message->toUtf8());
+    qDebug() << "Type: " << QString::number(type);
+    qDebug() << "Payload: " << *message;
+    QByteArray data(QByteArray::number(message->toUtf8().size()) + " " + message->toUtf8());
 
     switch(type) {
     case Ping:

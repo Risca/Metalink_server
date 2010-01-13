@@ -23,6 +23,7 @@ Dialog::Dialog(QWidget *parent)
     connect(connection, SIGNAL(incomingContactList(QStringList&)),
             this, SLOT(updateContactList(QStringList&)));
     connect(connection, SIGNAL(incomingChatCommand(QString)), this, SLOT(parseChatCommand(QString)));
+    connect(connection, SIGNAL(disconnected()), this, SLOT(disconnected()));
 
     setWindowTitle(tr("MetaLink Client"));
 
@@ -152,5 +153,22 @@ void Dialog::parseChatCommand(QString command)
                 qDebug() << "Received unknown chat ID, but no invite command :S";
             }
         }
+    }
+}
+
+void Dialog::disconnected()
+{
+    for (int i = 0; i < chats.size(); i++) {
+        chats.at(i)->sendCommand(MetaLinkChat::Leave);
+    }
+    chats.clear();
+
+    int ret = QMessageBox::question(this, tr("Disconnected to host"),
+                                    tr("You were disconnected from host\n") +
+                                    tr("Would you like to re-connect?"),
+                                    QMessageBox::Yes | QMessageBox::No);
+
+    if(ret==QMessageBox::Yes) {
+        connectToHost();
     }
 }

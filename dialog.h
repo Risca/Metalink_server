@@ -33,6 +33,11 @@ private:
     QString nick();
     QList<MetaLinkChat*> chats;
     MetaLinkConnection *connection;
+
+
+private slots:
+    void disconnected();
+
 };
 
 #endif // DIALOG_H
