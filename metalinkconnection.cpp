@@ -23,6 +23,7 @@ MetaLinkConnection::MetaLinkConnection(QObject *parent) :
     transferTimerId = 0;
     pingTimer.setInterval(PingInterval);
     connect(tcpSocket, SIGNAL(disconnected()), &pingTimer, SLOT(stop()));
+    connect(tcpSocket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
     connect(&pingTimer, SIGNAL(timeout()), this, SLOT(sendPing()));
 }
 

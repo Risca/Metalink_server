@@ -36,7 +36,7 @@ private:
 
 
 private slots:
-    void disconnected();
+    void disconnectedFromHost();
 
 };
 
