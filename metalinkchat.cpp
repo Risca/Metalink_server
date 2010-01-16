@@ -57,6 +57,7 @@ void MetaLinkChat::addParticipant(QString nick)
 {
     ui->listWidget->addItem(nick);
 }
+
 QStringList MetaLinkChat::participants()
 {
     QStringList nicks;
@@ -149,8 +150,11 @@ void MetaLinkChat::parseChatCommand(QString command)
     case Accept:
         break;
     case Reject:
+        ui->historyPlainTextEdit->appendPlainText(command + tr(" did not accept the invitation"));
         break;
     case Leave:
+        QMessageBox::warning(this, tr("Message"), command, QMessageBox::Ok);
+        emit leave(this);
         break;
     case Message:
         receivedNicks = MetaLinkConnection::parseMetaLinkList(command);

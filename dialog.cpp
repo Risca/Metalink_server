@@ -85,6 +85,7 @@ void Dialog::sendMessage()
 
 void Dialog::closeChat(MetaLinkChat *chat)
 {
+    chat->deleteLater();
     chats.removeAll(chat);
 }
 
@@ -124,13 +125,11 @@ void Dialog::parseChatCommand(QString command)
             if(operation == "INVITE") {
                 QString *temp = new QString(message.readAll());
                 QStringList receivedNicks = MetaLinkConnection::parseMetaLinkList(*temp);
+
+                bool startChat = false;
                 // I requested this chat session if
                 if(receivedNicks.contains(this->nick())) {
-                    MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks,
-                                                          connection, this);
-                    chats.append(chat);
-                    chat->sendCommand(MetaLinkChat::Accept);
-                    connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
+                    startChat = true;
                 } else {
                     int ret = QMessageBox::question(this, tr("New chat"),
                                                     tr("The following people wants to contact you:\n") +
@@ -138,17 +137,23 @@ void Dialog::parseChatCommand(QString command)
                                                     QMessageBox::Ok, QMessageBox::Cancel);
 
                     if (ret == QMessageBox::Ok) {
-                        MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks,
-                                                              connection, this);
-                        chats.append(chat);
-                        chat->sendCommand(MetaLinkChat::Accept);
-                        connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
+                        startChat = true;
                     }
                 }
 
-                chats.last()->show();
-                chats.last()->raise();
-                chats.last()->activateWindow();
+                if(startChat) {
+                    MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks, connection, this);
+                    chats.append(chat);
+                    chat->sendCommand(MetaLinkChat::Accept);
+                    connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
+                    chats.last()->show();
+                    chats.last()->raise();
+                    chats.last()->activateWindow();
+                } else {
+                    QString *rejectMessage = new QString(
+                            QString::number(chatID) + " REJECT");
+                    connection->send(MetaLinkConnection::Chat, rejectMessage);
+                }
             } else if (operation == "MESSAGE") {
                 QString broadcastMessage = message.readAll();
                 // Strip the sendername
