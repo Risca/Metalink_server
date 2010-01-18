@@ -57,6 +57,8 @@ private:
     QTcpSocket *tcpSocket;
     MetaLinkConnection *myConnection;
 
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 };
 
 #endif // METALINKCHAT_H

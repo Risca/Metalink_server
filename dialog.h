@@ -6,6 +6,7 @@
 //#include "metalinkchat.h"
 class MetaLinkChat;
 class MetaLinkConnection;
+class ConnectedNicksListWidget;
 
 namespace Ui
 {
@@ -33,10 +34,28 @@ private:
     QString nick();
     QList<MetaLinkChat*> chats;
     MetaLinkConnection *connection;
-
-
+    ConnectedNicksListWidget *connectedNicksList;
+/*    QPoint dragStartPosition;
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+*/
 private slots:
     void disconnectedFromHost();
+
+};
+
+class ConnectedNicksListWidget: public QListWidget
+{
+Q_OBJECT
+public:
+    ConnectedNicksListWidget(QWidget *parent = 0);
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
+private:
+    QPoint dragStartPosition;
 
 };
 

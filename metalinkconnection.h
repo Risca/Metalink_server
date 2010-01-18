@@ -39,6 +39,7 @@ public:
     bool ready();
     void connectToHost(const QString &hostName, quint16 port, OpenMode mode = ReadWrite);
 
+    static QString makeMetaLinkList(QString nick);
     static QString makeMetaLinkList(QStringList nicks);
     static QStringList parseMetaLinkList(QString &list);
     bool operator==(const MetaLinkConnection& other) const;
@@ -69,7 +70,7 @@ private:
     bool hasEnoughData();
     void processData();
 
-    QTcpSocket *tcpSocket;
+//    QTcpSocket *tcpSocket;
     quint16 blockSize;
     QByteArray buffer;
     int numBytesForCurrentDataType;

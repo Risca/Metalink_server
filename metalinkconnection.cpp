@@ -12,18 +12,16 @@ MetaLinkConnection::MetaLinkConnection(QObject *parent) :
         QTcpSocket(parent), myNick(new QString)
 {
 
-    tcpSocket = new QTcpSocket(this);
     currentState = SendingNick;
     currentDataType = Undefined;
 
-    connect(tcpSocket, SIGNAL(connected()), this, SLOT(sendNick()));
-    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(processReadyRead()));
+    connect(this, SIGNAL(connected()), this, SLOT(sendNick()));
+    connect(this, SIGNAL(readyRead()), this, SLOT(processReadyRead()));
 
     numBytesForCurrentDataType = -1;
     transferTimerId = 0;
     pingTimer.setInterval(PingInterval);
-    connect(tcpSocket, SIGNAL(disconnected()), &pingTimer, SLOT(stop()));
-    connect(tcpSocket, SIGNAL(disconnected()), this, SIGNAL(disconnected()));
+    connect(this, SIGNAL(disconnected()), &pingTimer, SLOT(stop()));
     connect(&pingTimer, SIGNAL(timeout()), this, SLOT(sendPing()));
 }
 
@@ -52,8 +50,14 @@ bool MetaLinkConnection::ready()
 void MetaLinkConnection::connectToHost(const QString &hostName, quint16 port, OpenMode mode)
 {
     blockSize = 0;
-    tcpSocket->abort();
-    tcpSocket->connectToHost(hostName, port, mode);
+    abort();
+    QTcpSocket::connectToHost(hostName, port, mode);
+}
+
+QString MetaLinkConnection::makeMetaLinkList(QString nick)
+{
+    QStringList foo(nick);
+    return makeMetaLinkList(foo);
 }
 
 QString MetaLinkConnection::makeMetaLinkList(QStringList nicks)
@@ -116,7 +120,7 @@ void MetaLinkConnection::processReadyRead()
         if (!hasEnoughData())
             return;
         processData();
-    } while (tcpSocket->bytesAvailable() > 0);
+    } while (this->bytesAvailable() > 0);
 }
 
 void MetaLinkConnection::sendPing()
@@ -164,7 +168,7 @@ void MetaLinkConnection::send(DataType type, QString *message)
         break;
     }
 
-    if (tcpSocket->write(data) == data.size()) {
+    if (this->write(data) == data.size()) {
         if(type!=Ping && type!=Pong) { //Filter out some pings and pongs
             qDebug() << "Sent message: " << data;
         }
@@ -197,8 +201,8 @@ int MetaLinkConnection::readDataIntoBuffer(int maxSize)
         return 0;
     }
 
-    while (tcpSocket->bytesAvailable() > 0 && buffer.size() < maxSize) {
-        buffer.append(tcpSocket->read(1));
+    while (this->bytesAvailable() > 0 && buffer.size() < maxSize) {
+        buffer.append(this->read(1));
         if (buffer.endsWith(SeparatorToken))
             break;
     }
@@ -207,7 +211,7 @@ int MetaLinkConnection::readDataIntoBuffer(int maxSize)
 
 int MetaLinkConnection::dataLengthForCurrentDataType()
 {
-    if (tcpSocket->bytesAvailable() <= 0 || readDataIntoBuffer() <= 0
+    if (this->bytesAvailable() <= 0 || readDataIntoBuffer() <= 0
             || !buffer.endsWith(SeparatorToken))
         return 0;
 
@@ -255,7 +259,7 @@ bool MetaLinkConnection::hasEnoughData()
     if (numBytesForCurrentDataType <= 0)
         numBytesForCurrentDataType = dataLengthForCurrentDataType();
 
-    if (tcpSocket->bytesAvailable() < numBytesForCurrentDataType
+    if (this->bytesAvailable() < numBytesForCurrentDataType
             || numBytesForCurrentDataType <= 0) {
         transferTimerId = startTimer(TransferTimeout);
         return false;
@@ -266,7 +270,7 @@ bool MetaLinkConnection::hasEnoughData()
 
 void MetaLinkConnection::processData()
 {
-    buffer = tcpSocket->read(numBytesForCurrentDataType);
+    buffer = this->read(numBytesForCurrentDataType);
     if (buffer.size() != numBytesForCurrentDataType) {
         abort();
         return;

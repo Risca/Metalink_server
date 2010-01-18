@@ -111,9 +111,6 @@
      </item>
     </layout>
    </item>
-   <item>
-    <widget class="QListWidget" name="listWidget"/>
-   </item>
   </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>

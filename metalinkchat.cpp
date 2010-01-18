@@ -197,3 +197,18 @@ void MetaLinkChat::appendMessage(QString *from, QString *message)
         ui->historyPlainTextEdit->appendPlainText(*from + ":\n  " + *message);
     }
 }
+
+void MetaLinkChat::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasFormat("text/plain"))
+        event->acceptProposedAction();
+}
+
+void MetaLinkChat::dropEvent(QDropEvent *event)
+{
+    QString inviteList =
+            MetaLinkConnection::makeMetaLinkList(event->mimeData()->text());
+    sendCommand(MetaLinkChat::Invite, &inviteList);
+
+    event->acceptProposedAction();
+}

@@ -7,9 +7,12 @@
 #include "ui_dialog.h"
 
 Dialog::Dialog(QWidget *parent)
-    : QDialog(parent), ui(new Ui::Dialog), connection(new MetaLinkConnection)
+    : QDialog(parent), ui(new Ui::Dialog),
+    connection(new MetaLinkConnection(this)),
+    connectedNicksList(new ConnectedNicksListWidget(this))
 {
     ui->setupUi(this);
+    ui->horizontalLayout_2->addWidget(connectedNicksList);
 
     connect(ui->connectButton, SIGNAL(clicked()), this, SLOT(connectToHost()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
@@ -27,7 +30,7 @@ Dialog::Dialog(QWidget *parent)
 
     setWindowTitle(tr("MetaLink Client"));
 
-    connect(ui->listWidget, SIGNAL(doubleClicked(QModelIndex)), connection, SLOT(startChat(QModelIndex)));
+    connect(connectedNicksList, SIGNAL(doubleClicked(QModelIndex)), connection, SLOT(startChat(QModelIndex)));
     ui->portLineEdit->setFocus();
 }
 
@@ -91,8 +94,8 @@ void Dialog::closeChat(MetaLinkChat *chat)
 
 void Dialog::updateContactList(QStringList &nicks)
 {
-    ui->listWidget->clear();
-    ui->listWidget->addItems(nicks);
+    connectedNicksList->clear();
+    connectedNicksList->addItems(nicks);
 }
 
 void Dialog::parseChatCommand(QString command)
@@ -143,6 +146,7 @@ void Dialog::parseChatCommand(QString command)
 
                 if(startChat) {
                     MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks, connection, this);
+//                    connect(connection, SIGNAL(disconnected()), chat, SLOT(deleteLater()));
                     chats.append(chat);
                     chat->sendCommand(MetaLinkChat::Accept);
                     connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));
@@ -168,11 +172,13 @@ void Dialog::parseChatCommand(QString command)
 
 void Dialog::disconnectedFromHost()
 {
-    for (int i = 0; i < chats.size(); i++) {
-        chats.at(i)->sendCommand(MetaLinkChat::Leave);
+    foreach(MetaLinkChat *chat, chats) {
+        chat->sendCommand(MetaLinkChat::Leave);
+        chat->close();
+        chat->deleteLater();
     }
     chats.clear();
-    ui->listWidget->clear();
+    connectedNicksList->clear();
 
     int ret = QMessageBox::question(this, tr("Disconnected to host"),
                                     tr("You were disconnected from host\n") +
@@ -182,4 +188,37 @@ void Dialog::disconnectedFromHost()
     if(ret==QMessageBox::Yes) {
         connectToHost();
     }
+}
+
+ConnectedNicksListWidget::ConnectedNicksListWidget(QWidget *parent) :
+        QListWidget(parent)
+{
+    setDragEnabled(true);
+}
+
+void ConnectedNicksListWidget::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+             dragStartPosition = event->pos();
+
+    QListWidget::mousePressEvent(event);
+}
+
+void ConnectedNicksListWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    if (!(event->buttons() & Qt::LeftButton))
+             return;
+    if ((event->pos() - dragStartPosition).manhattanLength()
+        < QApplication::startDragDistance())
+        return;
+
+    QDrag *drag = new QDrag(this);
+    QMimeData *mimeData = new QMimeData;
+
+//    mimeData->setData(mimeType, data);
+    mimeData->setText(currentItem()->text());
+    drag->setMimeData(mimeData);
+
+    Qt::DropAction dropAction = drag->exec(Qt::CopyAction | Qt::MoveAction);
+
 }
