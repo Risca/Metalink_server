@@ -222,7 +222,6 @@ void Manager::incomingConnection(int socketDescriptor)
     main->enableChat(true);
 #ifdef AUDIO
     if (audioStreamAvailable) {
-        MainWindow * main = (MainWindow*)chats.first();
         QString payload = main->getAudioPayload();
         connection->startAudioStream(true, payload);
         connection->send(Connection::Audio, payload);
