@@ -37,6 +37,21 @@ void Manager::readSettings()
     } else {
         _listenPort = 1337;
     }
+#ifdef AUDIO
+/* TODO: Save payload in settings
+if (_settings->contains("Audio payload")) {
+        MainWindow * main = (MainWindow*)chats.at(0);
+        main->changeAudioPayload(_settings->value("Audio payload").toString());
+    } else {
+        _settings->setValue("Audio payload","none");
+        MainWindow * main = (MainWindow*)chats.at(0);
+        main->changeAudioPayload("none");
+    }
+*/
+    if (_settings->contains("Audio enable")) {
+        startAudioStream(_settings->value("Audio enable").toBool());
+    }
+#endif
 }
 
 void Manager::sendCommandToMany(ChatCommand &command, const QStringList &recipients)
