@@ -146,7 +146,6 @@ void Dialog::parseChatCommand(QString command)
 
                 if(startChat) {
                     MetaLinkChat *chat = new MetaLinkChat(chatID, this->nick(), receivedNicks, connection, this);
-//                    connect(connection, SIGNAL(disconnected()), chat, SLOT(deleteLater()));
                     chats.append(chat);
                     chat->sendCommand(MetaLinkChat::Accept);
                     connect(chat, SIGNAL(leave(MetaLinkChat*)), this, SLOT(closeChat(MetaLinkChat*)));

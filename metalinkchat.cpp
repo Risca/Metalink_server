@@ -29,8 +29,6 @@ MetaLinkChat::MetaLinkChat(int ID, QString nick, QStringList firstParticipants, 
     ui->setupUi(this);
     if(!firstParticipants.isEmpty())
         ui->listWidget->addItems(firstParticipants);
-//    connect(this, SIGNAL(rejected()), this, SLOT(reject()));
-    connect(ui->messagePlainTextEdit, SIGNAL(textChanged()), this, SLOT(saveText()));
     connect(ui->sendButton, SIGNAL(clicked()), this, SLOT(sendMessage()));
     connect(this, SIGNAL(newMessage(QString*,QString*)),
             this, SLOT(appendMessage(QString*,QString*)));
