@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="destroyIcon">icons/sip-closed.png</file>
+        <file alias="broadcast">icons/broadcast.png</file>
+        <file>icons/subscribe.png</file>
+        <file>icons/voicechat.jpg</file>
+        <file>icons/wow_battleshout.gif</file>
+    </qresource>
+</RCC>
